@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = document.getElementById('grafico').getContext('2d');
   const ctxPizza = document.getElementById('grafico-pizza').getContext('2d');
 
+  // Gráfico de barras
   const graficoBarras = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -30,10 +31,20 @@ document.addEventListener('DOMContentLoaded', function() {
         y: {
           beginAtZero: true
         }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return 'Valor: ' + tooltipItem.raw;
+            }
+          }
+        }
       }
     }
   });
 
+  // Gráfico de pizza
   const graficoPizza = new Chart(ctxPizza, {
     type: 'pie',
     data: {
@@ -52,29 +63,49 @@ document.addEventListener('DOMContentLoaded', function() {
       }]
     },
     options: {
-      responsive: true
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return 'Proporção: ' + tooltipItem.raw + '%';
+            }
+          }
+        }
+      }
     }
   });
 
-  // Filtro para mudar o gráfico
+  // Filtro de categoria
   const selecaoCategoria = document.getElementById('selecaoCategoria');
   selecaoCategoria.addEventListener('change', function() {
     const categoriaSelecionada = selecaoCategoria.value;
-
+    
     if (categoriaSelecionada === 'vendas') {
-      // Atualizar gráfico de barras para vendas
       graficoBarras.data.datasets[0].data = [12, 19, 3, 5, 2];
       graficoPizza.data.datasets[0].data = [30, 20, 40, 10];
     } else if (categoriaSelecionada === 'lucro') {
-      // Atualizar gráfico de barras para lucro
-      graficoBarras.data.datasets[0].data = [5, 7, 2, 3, 1];
-      graficoPizza.data.datasets[0].data = [15, 25, 35, 25];
+      graficoBarras.data.datasets[0].data = [8, 15, 7, 4, 12];
+      graficoPizza.data.datasets[0].data = [25, 30, 35, 10];
     } else if (categoriaSelecionada === 'clientes') {
-      // Atualizar gráfico de barras para clientes
-      graficoBarras.data.datasets[0].data = [50, 80, 40, 60, 20];
-      graficoPizza.data.datasets[0].data = [40, 30, 20, 10];
+      graficoBarras.data.datasets[0].data = [50, 40, 70, 60, 55];
+      graficoPizza.data.datasets[0].data = [35, 40, 15, 10];
     }
 
+    graficoBarras.update();
+    graficoPizza.update();
+  });
+
+  // Filtro de data
+  const selecaoData = document.getElementById('selecaoData');
+  selecaoData.addEventListener('change', function() {
+    const dataSelecionada = selecaoData.value;
+    
+    // Aqui você pode atualizar os gráficos conforme a data escolhida
+    // Exemplo simples de log do valor selecionado
+    console.log("Período selecionado: " + dataSelecionada);
+    
+    // Atualizar os gráficos (exemplo)
     graficoBarras.update();
     graficoPizza.update();
   });
