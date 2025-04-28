@@ -25,6 +25,9 @@ h1 {
   text-align: center;
   box-sizing: border-box;
 }
-
+canvas {
+  width: 100% !important; /* Garantir que o canvas ocupe a largura total do container */
+  height: 300px !important; /* Ajusta a altura do canvas */
+}
 /* Responsividade: ajusta o layout em telas pequenas */
 @media (max-width
