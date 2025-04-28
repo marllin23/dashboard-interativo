@@ -4,17 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Interativo</title>
+  
+  <!-- Link para o CSS -->
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Carregar Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
   <h1>Dashboard Interativo</h1>
 
-  <div class="container">
-    <canvas id="grafico" width="400" height="300"></canvas>
+  <!-- Filtro para escolher a categoria de dados -->
+  <div class="filters">
+    <label for="selecaoCategoria">Escolha uma categoria:</label>
+    <select id="selecaoCategoria">
+      <option value="vendas">Vendas</option>
+      <option value="lucro">Lucro</option>
+      <option value="clientes">Clientes</option>
+    </select>
   </div>
 
+  <!-- Container para o gráfico de barras -->
+  <div class="container">
+    <canvas id="grafico"></canvas>
+  </div>
+
+  <!-- Container para o gráfico de pizza -->
+  <div class="container">
+    <canvas id="grafico-pizza"></canvas>
+  </div>
+
+  <!-- Script com o código JavaScript -->
   <script src="app.js"></script>
 
 </body>
