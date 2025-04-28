@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
     options: {
       responsive: true,
       animation: {
-        duration: 1500,
-        easing: 'easeInOutQuad',
+        duration: 1500, // Duração da animação
+        easing: 'easeInOutQuad' // Tipo de animação
       },
       scales: {
         y: {
