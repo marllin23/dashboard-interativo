@@ -1,3 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('grafico').innerText = 'Aqui vai aparecer o gráfico!';
+  const grafico = document.getElementById('grafico');
+  grafico.innerText = 'Gráfico será exibido aqui em breve!';
 });
