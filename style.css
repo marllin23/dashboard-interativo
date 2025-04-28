@@ -1,55 +1,41 @@
 body {
-  background-color: #e3f2fd;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
   margin: 0;
   padding: 20px;
 }
 
 h1 {
-  color: #0d47a1;
-  font-size: 2.5rem;
+  text-align: center;
+  color: #333;
+  font-size: 36px;
   margin-bottom: 40px;
 }
 
-.container {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  width: 80%;
-  max-width: 800px;
-  text-align: center;
-  box-sizing: border-box;
+.filters {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
-/* Responsividade: ajusta o layout em telas pequenas */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .container {
-    width: 95%;
-  }
+.filters label {
+  margin-right: 10px;
 }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem;
-  }
+.filters select, .filters input {
+  padding: 5px;
+  font-size: 16px;
+}
 
-  .container {
-    padding: 20px;
-  }
+.container {
+  max-width: 600px;
+  margin: 0 auto 40px;
 }
 
 canvas {
-  width: 100% !important; /* Garantir que o canvas ocupe a largura total do container */
-  height: 300px !important; /* Ajusta a altura do canvas */
+  width: 100% !important;
+  height: 400px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
