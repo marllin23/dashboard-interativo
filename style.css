@@ -23,4 +23,8 @@ h1 {
   width: 80%;
   max-width: 800px;
   text-align: center;
+  box-sizing: border-box;
 }
+
+/* Responsividade: ajusta o layout em telas pequenas */
+@media (max-width
