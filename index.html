@@ -14,28 +14,32 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<main class="dashboard-wrapper">
-  <h1>Dashboard Interativo</h1>
+<body>
+  <main class="dashboard-wrapper">
+    <h1>Dashboard Interativo</h1>
 
-  <div class="filters">
-    <label for="selecaoCategoria">Categoria:</label>
-    <select id="selecaoCategoria">
-      <option value="vendas">Vendas</option>
-      <option value="lucro">Lucro</option>
-      <option value="clientes">Clientes</option>
-    </select>
+    <div class="filters">
+      <label for="selecaoCategoria">Categoria:</label>
+      <select id="selecaoCategoria">
+        <option value="vendas">Vendas</option>
+        <option value="lucro">Lucro</option>
+        <option value="clientes">Clientes</option>
+      </select>
 
-    <label for="selecaoData">Período:</label>
-    <input type="month" id="selecaoData">
-  </div>
+      <label for="selecaoData">Período:</label>
+      <input type="month" id="selecaoData">
+    </div>
 
-  <div class="container">
-    <canvas id="grafico"></canvas>
-  </div>
+    <div class="container">
+      <canvas id="grafico"></canvas>
+    </div>
 
-  <div class="container">
-    <canvas id="grafico-pizza"></canvas>
-  </div>
-</main>
+    <div class="container">
+      <canvas id="grafico-pizza"></canvas>
+    </div>
+  </main>
 
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
 </html>
