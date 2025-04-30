@@ -14,38 +14,28 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-
+<main class="dashboard-wrapper">
   <h1>Dashboard Interativo</h1>
 
-  <!-- Filtro para escolher a categoria de dados -->
   <div class="filters">
-    <label for="selecaoCategoria">Escolha uma categoria:</label>
+    <label for="selecaoCategoria">Categoria:</label>
     <select id="selecaoCategoria">
       <option value="vendas">Vendas</option>
       <option value="lucro">Lucro</option>
       <option value="clientes">Clientes</option>
     </select>
-  </div>
 
-  <!-- Filtro de data -->
-  <div class="filters">
-    <label for="selecaoData">Escolha o período:</label>
+    <label for="selecaoData">Período:</label>
     <input type="month" id="selecaoData">
   </div>
 
-  <!-- Container para o gráfico de barras -->
   <div class="container">
     <canvas id="grafico"></canvas>
   </div>
 
-  <!-- Container para o gráfico de pizza -->
   <div class="container">
     <canvas id="grafico-pizza"></canvas>
   </div>
+</main>
 
-  <!-- Script com o código JavaScript -->
-  <script src="app.js"></script>
-
-</body>
 </html>
