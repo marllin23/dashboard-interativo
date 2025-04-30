@@ -1,17 +1,26 @@
 const dadosPorCategoria = {
   vendas: {
+    "2023-01": [120, 190, 300, 250, 220, 310],
+    "2023-02": [150, 180, 280, 260, 230, 320],
+    "2023-03": [130, 200, 290, 270, 240, 330],
     barras: [120, 190, 300, 250, 220, 310],
     linha: [150, 200, 180, 220, 300, 250],
     pizza: [300, 200, 100],
     radar: [4, 3, 5, 4, 4]
   },
   lucro: {
+    "2023-01": [80, 130, 200, 180, 160, 210],
+    "2023-02": [100, 140, 180, 170, 150, 220],
+    "2023-03": [90, 120, 170, 160, 140, 210],
     barras: [80, 130, 200, 180, 160, 210],
     linha: [100, 140, 160, 190, 250, 230],
     pizza: [150, 120, 80],
     radar: [3, 4, 4, 3, 4]
   },
   clientes: {
+    "2023-01": [60, 100, 150, 140, 130, 170],
+    "2023-02": [90, 110, 140, 130, 120, 190],
+    "2023-03": [80, 120, 160, 150, 140, 210],
     barras: [60, 100, 150, 140, 130, 170],
     linha: [90, 110, 130, 120, 160, 150],
     pizza: [180, 100, 60],
@@ -21,106 +30,99 @@ const dadosPorCategoria = {
 
 let graficoBarras, graficoPizza, graficoLinha, graficoRadar;
 
-function criarGraficos(categoria) {
-  const dados = dadosPorCategoria[categoria];
+const graficoOptions = {
+  responsive: true,
+  animation: {
+    duration: 1000,  // 1 segundo de animação
+    easing: 'easeInOutQuad'
+  },
+  plugins: {
+    legend: { position: 'top' }
+  }
+};
 
+function atualizarGraficos() {
+  const categoria = document.getElementById("selecaoCategoria").value;
+  const data = document.getElementById("selecaoData").value;
+
+  if (data && categoria) {
+    const chaveData = `${data.slice(0, 4)}-${data.slice(5, 7)}`;
+    const novosDados = dadosPorCategoria[categoria][chaveData];
+
+    graficoBarras.data.datasets[0].data = novosDados || dadosPorCategoria[categoria].barras;
+    graficoBarras.update();
+
+    graficoPizza.data.datasets[0].data = novosDados || dadosPorCategoria[categoria].pizza;
+    graficoPizza.update();
+
+    graficoLinha.data.datasets[0].data = novosDados || dadosPorCategoria[categoria].linha;
+    graficoLinha.update();
+
+    graficoRadar.data.datasets[0].data = novosDados || dadosPorCategoria[categoria].radar;
+    graficoRadar.update();
+  }
+}
+
+document.getElementById("selecaoCategoria").addEventListener("change", atualizarGraficos);
+document.getElementById("selecaoData").addEventListener("change", atualizarGraficos);
+
+window.onload = () => {
+  // Inicialização dos gráficos com dados iniciais (Janeiro 2023, Vendas)
   graficoBarras = new Chart(document.getElementById("grafico"), {
     type: 'bar',
     data: {
-      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
       datasets: [{
-        label: "Dados de Barras",
-        data: dados.barras,
-        backgroundColor: "#3498db"
+        label: 'Vendas (R$)',
+        data: dadosPorCategoria.vendas["2023-01"], // Janeiro de 2023
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
       }]
     },
-    options: { responsive: true }
+    options: graficoOptions
   });
 
   graficoPizza = new Chart(document.getElementById("grafico-pizza"), {
     type: 'pie',
     data: {
-      labels: ["Produto A", "Produto B", "Produto C"],
+      labels: ['Produto A', 'Produto B', 'Produto C'],
       datasets: [{
-        label: "Distribuição",
-        data: dados.pizza,
-        backgroundColor: ["#e74c3c", "#f1c40f", "#2ecc71"]
+        data: dadosPorCategoria.vendas.pizza,
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56'],
+        hoverOffset: 4
       }]
     },
-    options: { responsive: true }
+    options: graficoOptions
   });
 
   graficoLinha = new Chart(document.getElementById("grafico-linha"), {
     type: 'line',
     data: {
-      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
       datasets: [{
-        label: "Evolução",
-        data: dados.linha,
-        backgroundColor: "rgba(46, 204, 113, 0.4)",
-        borderColor: "rgba(39, 174, 96, 1)",
-        fill: true,
-        tension: 0.4
+        label: 'Lucro (R$)',
+        data: dadosPorCategoria.lucro["2023-01"], // Janeiro de 2023
+        fill: false,
+        borderColor: '#4bc0c0',
+        tension: 0.1
       }]
     },
-    options: { responsive: true }
+    options: graficoOptions
   });
 
   graficoRadar = new Chart(document.getElementById("grafico-radar"), {
     type: 'radar',
     data: {
-      labels: ["Qualidade", "Preço", "Atendimento", "Entrega", "Satisfação"],
+      labels: ['Vendas', 'Lucros', 'Clientes', 'Satisfação', 'Qualidade'],
       datasets: [{
-        label: "Avaliação",
-        data: dados.radar,
-        backgroundColor: "rgba(155, 89, 182, 0.2)",
-        borderColor: "rgba(142, 68, 173, 1)"
+        label: 'Desempenho',
+        data: dadosPorCategoria.vendas.radar,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
       }]
     },
-    options: { responsive: true }
+    options: graficoOptions
   });
-}
-
-function atualizarGraficos() {
-  const categoria = document.getElementById("selecaoCategoria").value;
-
-  const novosDados = dadosPorCategoria[categoria];
-
-  // Atualizar os dados de cada gráfico
-  graficoBarras.data.datasets[0].data = novosDados.barras;
-  graficoBarras.update();
-
-  graficoPizza.data.datasets[0].data = novosDados.pizza;
-  graficoPizza.update();
-
-  graficoLinha.data.datasets[0].data = novosDados.linha;
-  graficoLinha.update();
-
-  graficoRadar.data.datasets[0].data = novosDados.radar;
-  graficoRadar.update();
-}
-
-function mostrarGrafico(tipo) {
-  document.querySelectorAll(".grafico-canvas").forEach((canvas) => {
-    canvas.style.display = "none";
-  });
-
-  const ids = {
-    linha: "grafico-linha",
-    radar: "grafico-radar",
-    barras: "grafico",
-    pizza: "grafico-pizza"
-  };
-
-  document.getElementById(ids[tipo]).style.display = "block";
-}
-
-// Disparar atualização quando mudar os campos
-document.getElementById("selecaoCategoria").addEventListener("change", atualizarGraficos);
-document.getElementById("selecaoData").addEventListener("change", atualizarGraficos);
-
-// Inicializar com categoria padrão
-window.onload = () => {
-  criarGraficos("vendas");
-  mostrarGrafico("barras");
 };
