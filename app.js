@@ -1,30 +1,30 @@
 const dadosPorCategoria = {
   vendas: {
-    "2023-01": [120, 190, 300, 250, 220, 310],
-    "2023-02": [150, 180, 280, 260, 230, 320],
-    "2023-03": [130, 200, 290, 270, 240, 330],
-    barras: [120, 190, 300, 250, 220, 310],
-    linha: [150, 200, 180, 220, 300, 250],
-    pizza: [300, 200, 100],
-    radar: [4, 3, 5, 4, 4]
+    "2023-01": [1200, 1500, 1000, 1600, 2000, 1800],
+    "2023-02": [1300, 1600, 1100, 1700, 2100, 1900],
+    "2023-03": [1400, 1700, 1200, 1800, 2200, 2000],
+    barras: [1000, 1200, 1400, 1600, 1800, 2000],
+    pizza: [200, 300, 500],
+    linha: [1000, 1200, 1300, 1500, 1700, 1900],
+    radar: [40, 50, 60, 70, 80]
   },
   lucro: {
-    "2023-01": [80, 130, 200, 180, 160, 210],
-    "2023-02": [100, 140, 180, 170, 150, 220],
-    "2023-03": [90, 120, 170, 160, 140, 210],
-    barras: [80, 130, 200, 180, 160, 210],
-    linha: [100, 140, 160, 190, 250, 230],
-    pizza: [150, 120, 80],
-    radar: [3, 4, 4, 3, 4]
+    "2023-01": [400, 500, 300, 600, 700, 800],
+    "2023-02": [500, 600, 400, 700, 800, 900],
+    "2023-03": [600, 700, 500, 800, 900, 1000],
+    barras: [500, 600, 700, 800, 900, 1000],
+    pizza: [100, 200, 300],
+    linha: [400, 500, 600, 700, 800, 900],
+    radar: [50, 60, 70, 80, 90]
   },
   clientes: {
-    "2023-01": [60, 100, 150, 140, 130, 170],
-    "2023-02": [90, 110, 140, 130, 120, 190],
-    "2023-03": [80, 120, 160, 150, 140, 210],
-    barras: [60, 100, 150, 140, 130, 170],
-    linha: [90, 110, 130, 120, 160, 150],
-    pizza: [180, 100, 60],
-    radar: [5, 4, 5, 4, 5]
+    "2023-01": [50, 60, 40, 70, 80, 90],
+    "2023-02": [60, 70, 50, 80, 90, 100],
+    "2023-03": [70, 80, 60, 90, 100, 110],
+    barras: [40, 50, 60, 70, 80, 90],
+    pizza: [100, 200, 300],
+    linha: [50, 60, 70, 80, 90, 100],
+    radar: [30, 40, 50, 60, 70]
   }
 };
 
@@ -44,8 +44,10 @@ const graficoOptions = {
 function atualizarGraficos() {
   const categoria = document.getElementById("selecaoCategoria").value;
   const data = document.getElementById("selecaoData").value;
+  const regiao = document.getElementById("selecaoRegiao").value;
+  const produto = document.getElementById("selecaoProduto").value;
 
-  if (data && categoria) {
+  if (data && categoria && regiao && produto) {
     const chaveData = `${data.slice(0, 4)}-${data.slice(5, 7)}`;
     const novosDados = dadosPorCategoria[categoria][chaveData];
 
@@ -65,16 +67,17 @@ function atualizarGraficos() {
 
 document.getElementById("selecaoCategoria").addEventListener("change", atualizarGraficos);
 document.getElementById("selecaoData").addEventListener("change", atualizarGraficos);
+document.getElementById("selecaoRegiao").addEventListener("change", atualizarGraficos);
+document.getElementById("selecaoProduto").addEventListener("change", atualizarGraficos);
 
 window.onload = () => {
-  // Inicialização dos gráficos com dados iniciais (Janeiro 2023, Vendas)
   graficoBarras = new Chart(document.getElementById("grafico"), {
     type: 'bar',
     data: {
       labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
       datasets: [{
         label: 'Vendas (R$)',
-        data: dadosPorCategoria.vendas["2023-01"], // Janeiro de 2023
+        data: dadosPorCategoria.vendas["2023-01"],
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
@@ -102,7 +105,7 @@ window.onload = () => {
       labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
       datasets: [{
         label: 'Lucro (R$)',
-        data: dadosPorCategoria.lucro["2023-01"], // Janeiro de 2023
+        data: dadosPorCategoria.lucro["2023-01"],
         fill: false,
         borderColor: '#4bc0c0',
         tension: 0.1
