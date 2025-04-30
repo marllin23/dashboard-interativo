@@ -40,18 +40,6 @@ h1 {
   font-size: 1rem;
 }
 
-.container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
-}
-
-canvas {
-  width: 100% !important;
-  height: 400px;
-}
 .buttons {
   display: flex;
   justify-content: center;
@@ -75,3 +63,15 @@ canvas {
   background-color: #2980b9;
 }
 
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 400px;
+}
