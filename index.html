@@ -17,6 +17,20 @@
 <body>
   <main class="dashboard-wrapper">
     <h1>Dashboard Interativo</h1>
+    <div class="buttons">
+  <button onclick="mostrarGrafico('linha')">Gráfico de Linha</button>
+  <button onclick="mostrarGrafico('radar')">Gráfico Radar</button>
+  <button onclick="mostrarGrafico('barras')">Gráfico de Barras</button>
+  <button onclick="mostrarGrafico('pizza')">Gráfico de Pizza</button>
+</div>
+
+<div class="container" id="grafico-container">
+  <canvas id="grafico-linha" class="grafico-canvas" style="display: none;"></canvas>
+  <canvas id="grafico-radar" class="grafico-canvas" style="display: none;"></canvas>
+  <canvas id="grafico" class="grafico-canvas"></canvas>
+  <canvas id="grafico-pizza" class="grafico-canvas"></canvas>
+</div>
+
 
     <div class="filters">
       <label for="selecaoCategoria">Categoria:</label>
