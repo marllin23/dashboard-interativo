@@ -1,98 +1,126 @@
-// Gráfico de barras
-new Chart(document.getElementById("grafico"), {
-  type: 'bar',
-  data: {
-    labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
-    datasets: [{
-      label: "Vendas",
-      data: [120, 190, 300, 250, 220, 310],
-      backgroundColor: "#3498db"
-    }]
+const dadosPorCategoria = {
+  vendas: {
+    barras: [120, 190, 300, 250, 220, 310],
+    linha: [150, 200, 180, 220, 300, 250],
+    pizza: [300, 200, 100],
+    radar: [4, 3, 5, 4, 4]
   },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'top' }
-    }
-  }
-});
-
-// Gráfico de pizza
-new Chart(document.getElementById("grafico-pizza"), {
-  type: 'pie',
-  data: {
-    labels: ["Produto A", "Produto B", "Produto C"],
-    datasets: [{
-      label: "Distribuição de Vendas",
-      data: [300, 200, 100],
-      backgroundColor: ["#e74c3c", "#f1c40f", "#2ecc71"]
-    }]
+  lucro: {
+    barras: [80, 130, 200, 180, 160, 210],
+    linha: [100, 140, 160, 190, 250, 230],
+    pizza: [150, 120, 80],
+    radar: [3, 4, 4, 3, 4]
   },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'top' }
-    }
+  clientes: {
+    barras: [60, 100, 150, 140, 130, 170],
+    linha: [90, 110, 130, 120, 160, 150],
+    pizza: [180, 100, 60],
+    radar: [5, 4, 5, 4, 5]
   }
-});
+};
 
-// Gráfico de linha
-new Chart(document.getElementById("grafico-linha"), {
-  type: 'line',
-  data: {
-    labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
-    datasets: [{
-      label: "Evolução de Vendas",
-      data: [150, 200, 180, 220, 300, 250],
-      backgroundColor: "rgba(46, 204, 113, 0.4)",
-      borderColor: "rgba(39, 174, 96, 1)",
-      borderWidth: 2,
-      fill: true,
-      tension: 0.4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'top' }
-    }
-  }
-});
+let graficoBarras, graficoPizza, graficoLinha, graficoRadar;
 
-// Gráfico radar
-new Chart(document.getElementById("grafico-radar"), {
-  type: 'radar',
-  data: {
-    labels: ["Qualidade", "Preço", "Atendimento", "Entrega", "Satisfação"],
-    datasets: [{
-      label: "Avaliação",
-      data: [4, 3, 5, 4, 4],
-      backgroundColor: "rgba(155, 89, 182, 0.2)",
-      borderColor: "rgba(142, 68, 173, 1)",
-      borderWidth: 2
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'top' }
-    }
-  }
-});
+function criarGraficos(categoria) {
+  const dados = dadosPorCategoria[categoria];
 
-// Função para alternar gráficos
+  graficoBarras = new Chart(document.getElementById("grafico"), {
+    type: 'bar',
+    data: {
+      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      datasets: [{
+        label: "Dados de Barras",
+        data: dados.barras,
+        backgroundColor: "#3498db"
+      }]
+    },
+    options: { responsive: true }
+  });
+
+  graficoPizza = new Chart(document.getElementById("grafico-pizza"), {
+    type: 'pie',
+    data: {
+      labels: ["Produto A", "Produto B", "Produto C"],
+      datasets: [{
+        label: "Distribuição",
+        data: dados.pizza,
+        backgroundColor: ["#e74c3c", "#f1c40f", "#2ecc71"]
+      }]
+    },
+    options: { responsive: true }
+  });
+
+  graficoLinha = new Chart(document.getElementById("grafico-linha"), {
+    type: 'line',
+    data: {
+      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      datasets: [{
+        label: "Evolução",
+        data: dados.linha,
+        backgroundColor: "rgba(46, 204, 113, 0.4)",
+        borderColor: "rgba(39, 174, 96, 1)",
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: { responsive: true }
+  });
+
+  graficoRadar = new Chart(document.getElementById("grafico-radar"), {
+    type: 'radar',
+    data: {
+      labels: ["Qualidade", "Preço", "Atendimento", "Entrega", "Satisfação"],
+      datasets: [{
+        label: "Avaliação",
+        data: dados.radar,
+        backgroundColor: "rgba(155, 89, 182, 0.2)",
+        borderColor: "rgba(142, 68, 173, 1)"
+      }]
+    },
+    options: { responsive: true }
+  });
+}
+
+function atualizarGraficos() {
+  const categoria = document.getElementById("selecaoCategoria").value;
+
+  const novosDados = dadosPorCategoria[categoria];
+
+  // Atualizar os dados de cada gráfico
+  graficoBarras.data.datasets[0].data = novosDados.barras;
+  graficoBarras.update();
+
+  graficoPizza.data.datasets[0].data = novosDados.pizza;
+  graficoPizza.update();
+
+  graficoLinha.data.datasets[0].data = novosDados.linha;
+  graficoLinha.update();
+
+  graficoRadar.data.datasets[0].data = novosDados.radar;
+  graficoRadar.update();
+}
+
 function mostrarGrafico(tipo) {
   document.querySelectorAll(".grafico-canvas").forEach((canvas) => {
     canvas.style.display = "none";
   });
 
-  if (tipo === "linha") {
-    document.getElementById("grafico-linha").style.display = "block";
-  } else if (tipo === "radar") {
-    document.getElementById("grafico-radar").style.display = "block";
-  } else if (tipo === "barras") {
-    document.getElementById("grafico").style.display = "block";
-  } else if (tipo === "pizza") {
-    document.getElementById("grafico-pizza").style.display = "block";
-  }
+  const ids = {
+    linha: "grafico-linha",
+    radar: "grafico-radar",
+    barras: "grafico",
+    pizza: "grafico-pizza"
+  };
+
+  document.getElementById(ids[tipo]).style.display = "block";
 }
+
+// Disparar atualização quando mudar os campos
+document.getElementById("selecaoCategoria").addEventListener("change", atualizarGraficos);
+document.getElementById("selecaoData").addEventListener("change", atualizarGraficos);
+
+// Inicializar com categoria padrão
+window.onload = () => {
+  criarGraficos("vendas");
+  mostrarGrafico("barras");
+};
