@@ -1,110 +1,43 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const ctx = document.getElementById('grafico').getContext('2d');
-  const ctxPizza = document.getElementById('grafico-pizza').getContext('2d');
-
-  // Gráfico de barras
-  const graficoBarras = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
-      datasets: [{
-        label: 'Vendas',
-        data: [12, 19, 3, 5, 2],
-        backgroundColor: [
-          '#42a5f5',
-          '#66bb6a',
-          '#ffa726',
-          '#ab47bc',
-          '#ef5350'
-        ],
-        borderColor: '#1e88e5',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      animation: {
-        duration: 1500,
-        easing: 'easeInOutQuad'
-      },
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: function(tooltipItem) {
-              return 'Valor: ' + tooltipItem.raw;
-            }
-          }
-        }
-      }
+// Gráfico de barras
+new Chart(document.getElementById("grafico"), {
+  type: 'bar',
+  data: {
+    labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+    datasets: [{
+      label: "Vendas",
+      data: [120, 190, 300, 250, 220, 310],
+      backgroundColor: "#3498db"
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' }
     }
-  });
+  }
+});
 
-  // Gráfico de pizza
-  const graficoPizza = new Chart(ctxPizza, {
-    type: 'pie',
-    data: {
-      labels: ['Produto A', 'Produto B', 'Produto C', 'Produto D'],
-      datasets: [{
-        label: 'Distribuição de Vendas',
-        data: [30, 20, 40, 10],
-        backgroundColor: [
-          '#ff6384',
-          '#36a2eb',
-          '#ffcd56',
-          '#4bc0c0'
-        ],
-        borderColor: '#fff',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: function(tooltipItem) {
-              return 'Proporção: ' + tooltipItem.raw + '%';
-            }
-          }
-        }
-      }
+// Gráfico de pizza
+new Chart(document.getElementById("grafico-pizza"), {
+  type: 'pie',
+  data: {
+    labels: ["Produto A", "Produto B", "Produto C"],
+    datasets: [{
+      label: "Distribuição de Vendas",
+      data: [300, 200, 100],
+      backgroundColor: ["#e74c3c", "#f1c40f", "#2ecc71"]
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' }
     }
-  });
+  }
+});
 
-  // Filtro de categoria
-  const selecaoCategoria = document.getElementById('selecaoCategoria');
-  selecaoCategoria.addEventListener('change', function() {
-    const categoriaSelecionada = selecaoCategoria.value;
-    
-    if (categoriaSelecionada === 'vendas') {
-      graficoBarras.data.datasets[0].data = [12, 19, 3, 5, 2];
-      graficoPizza.data.datasets[0].data = [30, 20, 40, 10];
-    } else if (categoriaSelecionada === 'lucro') {
-      graficoBarras.data.datasets[0].data = [8, 15, 7, 4, 12];
-      graficoPizza.data.datasets[0].data = [25, 30, 35, 10];
-    } else if (categoriaSelecionada === 'clientes') {
-      graficoBarras.data.datasets[0].data = [50, 40, 70, 60, 55];
-      graficoPizza.data.datasets[0].data = [35, 40, 15, 10];
-    }
-
-    graficoBarras.update();
-    graficoPizza.update();
-  });
-
-  // Filtro de data
-  const selecaoData = document.getElementById('selecaoData');
-  selecaoData.addEventListener('change', function() {
-    const dataSelecionada = selecaoData.value;
-    
-    // Aqui você pode atualizar os gráficos conforme a data escolhida
-    // Exemplo simples de log do valor selecionado
-    console.log("Período selecionado: " + dataSelecionada);
-    const graficoLinha = new Chart(document.getElementById("grafico-linha"), {
+// Gráfico de linha
+new Chart(document.getElementById("grafico-linha"), {
   type: 'line',
   data: {
     labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
@@ -126,7 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-const graficoRadar = new Chart(document.getElementById("grafico-radar"), {
+// Gráfico radar
+new Chart(document.getElementById("grafico-radar"), {
   type: 'radar',
   data: {
     labels: ["Qualidade", "Preço", "Atendimento", "Entrega", "Satisfação"],
@@ -146,6 +80,7 @@ const graficoRadar = new Chart(document.getElementById("grafico-radar"), {
   }
 });
 
+// Função para alternar gráficos
 function mostrarGrafico(tipo) {
   document.querySelectorAll(".grafico-canvas").forEach((canvas) => {
     canvas.style.display = "none";
@@ -161,10 +96,3 @@ function mostrarGrafico(tipo) {
     document.getElementById("grafico-pizza").style.display = "block";
   }
 }
-
-    
-    // Atualizar os gráficos (exemplo)
-    graficoBarras.update();
-    graficoPizza.update();
-  });
-});
