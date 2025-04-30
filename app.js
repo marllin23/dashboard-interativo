@@ -104,6 +104,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Aqui você pode atualizar os gráficos conforme a data escolhida
     // Exemplo simples de log do valor selecionado
     console.log("Período selecionado: " + dataSelecionada);
+    const graficoLinha = new Chart(document.getElementById("grafico-linha"), {
+  type: 'line',
+  data: {
+    labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+    datasets: [{
+      label: "Evolução de Vendas",
+      data: [150, 200, 180, 220, 300, 250],
+      backgroundColor: "rgba(46, 204, 113, 0.4)",
+      borderColor: "rgba(39, 174, 96, 1)",
+      borderWidth: 2,
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' }
+    }
+  }
+});
+
+const graficoRadar = new Chart(document.getElementById("grafico-radar"), {
+  type: 'radar',
+  data: {
+    labels: ["Qualidade", "Preço", "Atendimento", "Entrega", "Satisfação"],
+    datasets: [{
+      label: "Avaliação",
+      data: [4, 3, 5, 4, 4],
+      backgroundColor: "rgba(155, 89, 182, 0.2)",
+      borderColor: "rgba(142, 68, 173, 1)",
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' }
+    }
+  }
+});
+
+function mostrarGrafico(tipo) {
+  document.querySelectorAll(".grafico-canvas").forEach((canvas) => {
+    canvas.style.display = "none";
+  });
+
+  if (tipo === "linha") {
+    document.getElementById("grafico-linha").style.display = "block";
+  } else if (tipo === "radar") {
+    document.getElementById("grafico-radar").style.display = "block";
+  } else if (tipo === "barras") {
+    document.getElementById("grafico").style.display = "block";
+  } else if (tipo === "pizza") {
+    document.getElementById("grafico-pizza").style.display = "block";
+  }
+}
+
     
     // Atualizar os gráficos (exemplo)
     graficoBarras.update();
