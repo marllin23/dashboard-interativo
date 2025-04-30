@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Interativo</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Interativo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <main class="dashboard-wrapper">
-    <h1>Dashboard Interativo</h1>
+    <div class="dashboard-wrapper">
+        <h1>Dashboard Interativo</h1>
+        <div class="filters">
+            <select id="selecaoCategoria">
+                <option value="vendas">Vendas</option>
+                <option value="lucro">Lucros</option>
+                <option value="clientes">Clientes</option>
+            </select>
+            <select id="selecaoData">
+                <option value="2023-01">Janeiro 2023</option>
+                <option value="2023-02">Fevereiro 2023</option>
+                <option value="2023-03">Março 2023</option>
+            </select>
+        </div>
 
-    <div class="filters">
-      <label for="selecaoCategoria">Categoria:</label>
-      <select id="selecaoCategoria">
-        <option value="vendas">Vendas</option>
-        <option value="lucro">Lucro</option>
-        <option value="clientes">Clientes</option>
-      </select>
-
-      <label for="selecaoData">Período:</label>
-      <input type="month" id="selecaoData">
+        <div class="charts">
+            <div class="container">
+                <canvas id="grafico"></canvas>
+            </div>
+            <div class="container">
+                <canvas id="grafico-pizza"></canvas>
+            </div>
+            <div class="container">
+                <canvas id="grafico-linha"></canvas>
+            </div>
+            <div class="container">
+                <canvas id="grafico-radar"></canvas>
+            </div>
+        </div>
     </div>
 
-    <div class="buttons">
-      <button onclick="mostrarGrafico('linha')">Gráfico de Linha</button>
-      <button onclick="mostrarGrafico('radar')">Gráfico Radar</button>
-      <button onclick="mostrarGrafico('barras')">Gráfico de Barras</button>
-      <button onclick="mostrarGrafico('pizza')">Gráfico de Pizza</button>
-    </div>
-
-    <div class="container" id="grafico-container">
-      <canvas id="grafico-linha" class="grafico-canvas" style="display: none;"></canvas>
-      <canvas id="grafico-radar" class="grafico-canvas" style="display: none;"></canvas>
-      <canvas id="grafico" class="grafico-canvas"></canvas>
-      <canvas id="grafico-pizza" class="grafico-canvas"></canvas>
-    </div>
-  </main>
-
-  <!-- Script principal -->
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
