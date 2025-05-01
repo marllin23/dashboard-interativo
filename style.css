@@ -9,7 +9,7 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  overflow-x: hidden; /* remove scroll lateral */
+  overflow-x: hidden;
 }
 
 /* Título */
@@ -42,14 +42,14 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Grid de gráficos: 2 colunas */
+/* Grid de gráficos: 2 por linha */
 .graficos-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* exatamente 2 colunas */
   gap: 25px;
-  width: 100%;
+  width: 95%;
   max-width: 1000px;
-  padding: 0 20px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 
@@ -60,5 +60,5 @@ canvas {
   padding: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   width: 100%;
-  height: 250px;
+  height: 220px; /* altura menor e igual para todos */
 }
