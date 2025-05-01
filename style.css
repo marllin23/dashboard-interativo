@@ -1,3 +1,4 @@
+/* Estilo geral */
 body {
   margin: 0;
   padding: 0;
@@ -8,20 +9,25 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  overflow-x: hidden; /* remove scroll lateral */
 }
 
+/* Título */
 h1 {
   margin: 30px 0 10px;
   font-size: 2.5rem;
   text-align: center;
 }
 
+/* Filtros */
 .filtros {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 30px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .filtros select,
@@ -36,20 +42,23 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Grid de gráficos: 2 colunas */
 .graficos-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* duas colunas fixas */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
-  width: 95%;
-  max-width: 1100px;
-  margin-bottom: 50px;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
+/* Estilo dos gráficos */
 canvas {
   background-color: #fff;
   border-radius: 15px;
   padding: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  width: 100%;       /* ocupa a coluna toda */
-  height: 250px;     /* reduz altura */
+  width: 100%;
+  height: 250px;
 }
